@@ -12,6 +12,7 @@ class Dashboard extends Component {
       url: '',
     }
     this.updateQueries = this.updateQueries.bind(this);
+    this.hypoSearchURL = this.hypoSearchURL.bind(this);
   }
 
   updateQueries (value, name) {
@@ -19,34 +20,29 @@ class Dashboard extends Component {
     console.log(this.state);
   }
 
-  componentDidMount() {
-      // Call our fetch function below once the component mounts
-  axios.request({
-          url: `api/search/url`,
-          method: 'get',
-      }).then((response) => {
-          let stateData = this.state.data.slice();
-          console.log(stateData);
-          response.data.forEach(item => stateData.push(item));
-          console.log(stateData, 'stateData');
-          this.setState({data: stateData});
-          console.log(this.state);
-      }).catch((error) => {
-          console.log('error', error);
-      });
+  hypoSearchURL () {
+      //http://teaching.lfhanley.net/english528sp18/texts/edna-st-vincent-millay/
+      // http://teaching.lfhanley.net/english528sp18/texts/allen-ginsberg-howl-1956/
+    axios.request({
+            url: `api/search/url`,
+            method: 'get',
+            params: {
+              queriedURL: this.state.url
+            }
+        }).then((response) => {
+            console.log(response);
+            let stateData = this.state.data.slice();
+            response.data.forEach(item => stateData.push(item));
+            console.log(stateData, 'stateData');
+            this.setState({data: stateData, url: ''});
+        }).catch((error) => {
+            console.log('error', error);
+        });
   }
-    // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
-  // callBackendAPI = async () => {
-  //   const response = await fetch('/express_backend');
-  //   console.log(response, response.text());
-  //   const body = await response;
-  //
-  //
-  //   if (response.status !== 200) {
-  //     throw Error(body.message)
-  //   }
-  //   return body;
-  // };
+
+  componentDidMount() {
+    return true;
+  }
 
   render() {
     return (
@@ -65,8 +61,8 @@ class Dashboard extends Component {
                 inputValue={this.state.url}
                 updateQueries={this.updateQueries}
               />
-              <button>Submit</button>
             </form>
+            <button onClick={this.hypoSearchURL}>Submit</button>
           </div>
           <div className="responses">
             <Responses
