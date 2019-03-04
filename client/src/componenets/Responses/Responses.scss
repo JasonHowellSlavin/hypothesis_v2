@@ -1,0 +1,46 @@
+@mixin flex-box ($direction: row, $justify: center, $align: center) {
+    display: flex;
+    flex-direction: $direction;
+    jusitfy-content: $justify;
+    align-itmes: $align;
+}
+
+$section-trext-padding: 5px 20px;
+
+.responses {
+    div {
+        width: 75%;
+    }
+
+    section {
+        @include flex-box(column, flex-start, flex-start);
+        background-color: #E9E9E9;
+        margin: 20px;
+        box-shadow: 1px 1px 10px 3px #BCBCBC;
+
+        h4 {
+            margin: 0;
+            padding: $section-trext-padding;
+            text-align: left;
+
+            &:first-of-type {
+                padding-top: 20px;
+            }
+
+            &:last-of-type {
+                padding-bottom: 20px;
+            }
+
+            span {
+                font-size: 16px;
+                font-weight: normal;
+            }
+        }
+
+        p {
+            margin: 0;
+            text-align: left;
+            padding: $section-trext-padding;
+        }
+    }
+}
