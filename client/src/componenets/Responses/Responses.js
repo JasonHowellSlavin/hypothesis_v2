@@ -7,11 +7,11 @@ const Responses = (props) => (
               <section key={item.id}>
                 <h4>Student Account: <span>{item.user.replace('acct:', '')}</span></h4>
                 <h4>Date Added: <span>{item.created.slice(0, item.created.indexOf('T'))}</span></h4>
-                <h4>Annotation:</h4>
+                <h4>{item.target[0].selector ? 'Annotation:' : 'Response:' }</h4>
                 <p>{item.text}</p>
                 <h4>Target Text:</h4>
-                <p>{item.target[0].selector[3].exact !== undefined ? item.target[0].selector[3].exact : 'target unspecified'}</p>
-                <h4>URL: <span>{item.uri}</span></h4>
+                <p>{item.target[0].selector ? item.target[0].selector[3].exact : 'Responsended to another annotation'}</p>
+                <h4>URL: <span>{item.uri !== undefined ? item.uri : 'No url specified'}</span></h4>
               </section>
         ))}
       </div>
