@@ -1,9 +1,4 @@
-@mixin flex-box ($direction: row, $justify: center, $align: center) {
-    display: flex;
-    flex-direction: $direction;
-    jusitfy-content: $justify;
-    align-itmes: $align;
-}
+@import '../../scss/_util.scss';
 
 .App {
   text-align: center;
@@ -34,6 +29,23 @@ button {
 }
 
 .user-inputs {
-    @include flex-box(row);
-    background-color: #DDEEDD;
+    @include flex-box(column);
+    background-color: #88AADD;
+
+    h3 {
+      font-weight: normal;
+    }
+}
+
+.visualization {
+    @include flex-box(row, flex-start, flex-start);
+    width: 100%;
+}
+
+.response-browser {
+    width: 50%;
+}
+
+.graphs {
+    width: 50%;
 }

@@ -1,0 +1,38 @@
+@import '../../scss/_util.scss';
+
+.filter-wrapper {
+    @include flex-box(column);
+    min-height: 100px;
+    margin-bottom: 20px;
+    background-color: #DEDEDE;
+
+    h3 {
+        padding-top: 20px;
+        margin: 0;
+    }
+
+    .filter-container {
+        @include flex-box();
+        padding: 0 20px;
+    }
+
+    .filter-set {
+        @include flex-box(column);
+
+        p {
+            margin: 0;
+            text-align: left;
+            padding-left: 3px;
+            font-size: 16px;
+        }
+
+        div {
+            @include flex-box;
+        }
+
+        input {
+            margin: auto 0;
+            height: 22px;
+        }
+    }
+}

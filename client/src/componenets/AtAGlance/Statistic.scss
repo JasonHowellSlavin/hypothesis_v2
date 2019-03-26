@@ -1,0 +1,36 @@
+@import '../../scss/_variables.scss';
+@import '../../scss/_util.scss';
+
+.stat-view {
+    text-align: left;
+    background-color: $grey;
+    margin: 20px;
+    box-shadow: 1px 1px 10px 3px #BCBCBC;
+    border: 2px solid $black;
+    // max-height: 400px;
+    // overflow-y: scroll;
+
+    h3 {
+        text-align: center;
+        padding: 10px;
+        margin: 0;
+        border-bottom: 2px solid $black;
+    }
+
+    p, h4 {
+        padding: 5px 20px;
+    }
+
+    .student-stat {
+        @include flex-box(row, space-between);
+        width: 100%;
+    }
+
+    &.blue {
+        background-color: $blue;
+    }
+
+    &.green {
+        background-color: $green;
+    }
+}

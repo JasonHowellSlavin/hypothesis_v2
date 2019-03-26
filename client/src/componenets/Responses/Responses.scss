@@ -1,15 +1,10 @@
-@mixin flex-box ($direction: row, $justify: center, $align: center) {
-    display: flex;
-    flex-direction: $direction;
-    jusitfy-content: $justify;
-    align-itmes: $align;
-}
+@import '../../scss/_util.scss';
 
 $section-trext-padding: 5px 20px;
 
 .responses {
     div {
-        width: 75%;
+        width: 100%;
     }
 
     section {

@@ -12,8 +12,6 @@ class Input extends Component {
   }
 
   render() {
-    const inputValue = this.props.inputValue;
-
     return (
       <div>
         <label htmlFor={this.props.labelInputName}>{this.props.labelText}</label>
