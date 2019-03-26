@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "client-install": "npm install --prefix client",
-    "dev-server": "node server.js",
-    "server": "nodemon server.js",
+    "dev-server": "nodemon server.js",
+    "server": "node server.js",
     "client": "npm run-script build --prefix client",
     "start": "concurrently \"npm run server\" \"npm run client\""
   },
