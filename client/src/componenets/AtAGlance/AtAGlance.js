@@ -63,20 +63,17 @@ class AtAGlance extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        let sortedStudents = this.getListOfMostActiveUsers(this.props.searchData);
-        let mostAndLeast = this.getMostAndLeastActiveUsers(this.getListOfMostActiveUsers(this.props.searchData));
+        let sortedStudents = this.getListOfMostActiveUsers(this.props.activeData);
+        let mostAndLeast = this.getMostAndLeastActiveUsers(this.getListOfMostActiveUsers(this.props.activeData));
 
-        if (this.props.searchData !== prevProps.searchData) {
+        if (this.props.activeData !== prevProps.activeData) {
             this.setState({mostAndLeastActive: mostAndLeast, sortedStudents: sortedStudents})
         }
-
-        console.log('State', this.state);
     }
 
     render() {
         return (
          <div className="at-a-glance">
-            <h2>At a Glance Statistics </h2>
             <Statistic
                 mostAndLeastActive={this.state.mostAndLeastActive}
                 sortedStudents={this.state.sortedStudents}

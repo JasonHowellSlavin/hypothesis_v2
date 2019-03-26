@@ -5,6 +5,7 @@ import Input from '../Input/Input.js';
 import Responses from '../Responses/Responses.js';
 import Filters from '../Filters/Filters.js';
 import AtAGlance from '../AtAGlance/AtAGlance.js';
+import Sort from '../Sort/Sort.js';
 
 class Dashboard extends Component {
     constructor() {
@@ -27,6 +28,7 @@ class Dashboard extends Component {
         this.filterByTargetText = this.filterByTargetText.bind(this);
         this.removeDuplicates = this.removeDuplicates.bind(this);
         this.clearFilters = this.clearFilters.bind(this);
+        this.sortHook = this.sortHook.bind(this);
     }
 
     // Functionality methods
@@ -98,6 +100,11 @@ class Dashboard extends Component {
     clearFilters () {
         let unfilteredData = this.state.data;
         this.setState({activeData: unfilteredData});
+    }
+
+    // Sort methods
+    sortHook (methodReturn) {
+        this.setState({activeData: methodReturn})
     }
 
 
@@ -173,13 +180,27 @@ class Dashboard extends Component {
                 <section className="visualization">
                     <div className="response-browser">
                         <section className="responses">
+                            <h2> Annotations </h2>
+                            <p>Currently viewing {this.state.activeData.length ? this.state.activeData.length : 0} of {this.state.data.length ? this.state.data.length : 0} total Annotations</p>
+                            <div className="sort-wrapper">
+                                <Sort
+                                    data={this.state.activeData}
+                                    sortHook={this.sortHook}
+                                />
+                            </div>
                             <Responses
-                                data={this.state.activeData}
+                                activeData={this.state.activeData}
+                                totalData={this.state.data}
                             />
                         </section>
                     </div>
                     <div className="graphs">
-                        <AtAGlance className="at-a-glance-wrapper" searchData={this.state.activeData} />
+                        <h2>At a Glance Statistics </h2>
+                        <p>Currently viewing statistics from {this.state.activeData.length ? this.state.activeData.length : 0} annotations</p>
+                        <AtAGlance className="at-a-glance-wrapper"
+                            activeData={this.state.activeData}
+                            totalData={this.state.data}
+                         />
                     </div>
                 </section>
           </div>
