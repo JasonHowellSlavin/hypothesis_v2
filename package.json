@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "client-install": "npm install --prefix client",
-    "start": "node server.js",
+    "dev-server": "node server.js",
     "server": "nodemon server.js",
     "client": "npm run-script build --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",

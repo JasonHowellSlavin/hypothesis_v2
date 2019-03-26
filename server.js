@@ -14,19 +14,19 @@ if (process.env.NODE_ENV !== 'production') {
 
 app.use(cors());
 //Static file declaration
-app.use(express.static( 'client/build'));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 //production mode
 if(process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
+  app.use(express.static(path.join(__dirname, 'client/build')));
   //
   app.get('/', (req, res) => {
-    res.sendfile('client/build/index.html');
+    res.sendfile(path.join(__dirname = 'client/build/index.html'));
   })
 }
 //build mode
 app.get('/', (req, res) => {
-  res.sendFile('client/public/index.html');
+  res.sendFile(path.join(__dirname+'/client/public/index.html'));
 })
 
 //start server
