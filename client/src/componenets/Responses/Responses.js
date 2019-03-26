@@ -3,8 +3,7 @@ import './Responses.scss';
 
 const Responses = (props) => (
      <div>
-        <h2> Annotations </h2>
-        {props.data.map((item, i) => (
+        {props.activeData.map((item, i) => (
               <section key={item.id}>
                 <h4>Student Account: <span>{item.user.replace('acct:', '')}</span></h4>
                 <h4>Date Added: <span>{item.created.slice(0, item.created.indexOf('T'))}</span></h4>
