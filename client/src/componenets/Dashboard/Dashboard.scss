@@ -36,3 +36,16 @@ button {
       font-weight: normal;
     }
 }
+
+.visualization {
+    @include flex-box(row, flex-start, flex-start);
+    width: 100%;
+}
+
+.response-browser {
+    width: 50%;
+}
+
+.graphs {
+    width: 50%;
+}

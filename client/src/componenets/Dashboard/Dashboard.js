@@ -4,6 +4,7 @@ import axios from 'axios';
 import Input from '../Input/Input.js';
 import Responses from '../Responses/Responses.js';
 import Filters from '../Filters/Filters.js';
+import AtAGlance from '../AtAGlance/AtAGlance.js';
 
 class Dashboard extends Component {
     constructor() {
@@ -59,7 +60,7 @@ class Dashboard extends Component {
     }
 
     filterByDate (date) {
-        let dateRegEx = /([0-9]{4}\-[0-9]{2}\-[0-9]{2})/g;
+        let dateRegEx = /([0-9]{4}-[0-9]{2}-[0-9]{2})/g;
         let filteredActiveData = this.state.activeData.slice();
 
         let dateFiltered =  filteredActiveData.filter((item, index, array) => {
@@ -67,7 +68,7 @@ class Dashboard extends Component {
         })
 
         if (date !== date.match(dateRegEx)[0]) {
-            this.setState({filterMessaging: 'Sorry you did not enter the date correctly'});
+            this.setState({filterMessaging: 'Sorry you did not enter the date correctly, format should be YYYY-MM-DD'});
         } else if (dateFiltered.length <= 0) {
             this.setState({filterMessaging: 'It appears there are annotations matching the date you chose'});
         } else {
@@ -111,6 +112,7 @@ class Dashboard extends Component {
               queriedURL: this.state.url
             }
         }).then((response) => {
+            console.log('Response:', response);
             let stateData = this.state.data.slice();
 
             response.data.forEach(item => stateData.push(item));
@@ -139,7 +141,7 @@ class Dashboard extends Component {
                 <header className="App-header">
                     <h1 className="App-title">Hypothes.is Dashboard</h1>
                 </header>
-                <section className="response-browser">
+                <section className="interface">
                     <div className="user-inputs">
                         <form id="form">
                             <h3> Enter a URL below to see annotations from that url.
@@ -167,15 +169,19 @@ class Dashboard extends Component {
                             clearFilters={this.clearFilters}
                          />
                     </section>
-                    <section className="responses">
-                        <Responses
-                            data={this.state.activeData}
-                        />
-                    </section>
                 </section>
-                <section className="graphs">
+                <section className="visualization">
+                    <div className="response-browser">
+                        <section className="responses">
+                            <Responses
+                                data={this.state.activeData}
+                            />
+                        </section>
+                    </div>
+                    <div className="graphs">
+                        <AtAGlance className="at-a-glance-wrapper" searchData={this.state.activeData} />
+                    </div>
                 </section>
-                <p className="App-intro"></p>
           </div>
         );
     }
