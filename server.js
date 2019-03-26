@@ -21,7 +21,7 @@ if(process.env.NODE_ENV === 'production') {
   app.use(express.static('./client/build'));
   //
   app.get('/', (req, res) => {
-    res.sendfile('./client/build/index.html'));
+    res.sendfile('./client/build/index.html');
   })
 }
 //build mode
