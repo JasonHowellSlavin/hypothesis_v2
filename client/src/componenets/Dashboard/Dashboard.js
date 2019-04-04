@@ -150,20 +150,20 @@ class Dashboard extends Component {
                 </header>
                 <section className="interface">
                     <div className="user-inputs">
-                        <form id="form">
-                            <h3> Enter a URL below to see annotations from that url.
-                            If you would like to check multiple urls, simply add them one at a
-                            time and click submit</h3>
-                            <Input
-                                url={this.state.url}
-                                labelInputName={'url'}
-                                labelText={'URL'}
-                                inputType={'text'}
-                                inputValue={this.state.url}
-                                updateQueries={this.updateQueries}
-                            />
-                        </form>
+                        <h3> Enter a URL below to see annotations from that url.
+                        If you would like to check multiple urls, simply add them one at a
+                        time and click submit</h3>
                         <div>
+                            <form id="form">
+                                <Input
+                                    url={this.state.url}
+                                    labelInputName={'url'}
+                                    labelText={'URL'}
+                                    inputType={'text'}
+                                    inputValue={this.state.url}
+                                    updateQueries={this.updateQueries}
+                                />
+                            </form>
                             <button onClick={this.hypoSearchURL}>Submit</button>
                         </div>
                     </div>

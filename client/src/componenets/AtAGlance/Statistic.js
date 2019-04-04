@@ -31,8 +31,9 @@ const Statistic = (props) => {
                 <h3>All Students and their post numbers</h3>
                 {props.sortedStudents.map((elem, index) => {
                     return (<div className="student-stat" key={`sorted:${elem.studentName}`}>
-                        <p>Student Name: {elem.studentName}</p>
-                        <p>Number of Posts: {elem.numPosts}</p>
+                        <p><strong>Student Name:</strong> {elem.studentName}</p>
+                        <p><strong>Avg. Length of Annotations:</strong> {elem.meanOfAnnotations}</p>
+                        <p><strong>Number of Posts:</strong> {elem.numPosts}</p>
                     </div>)
                 })}
             </div>

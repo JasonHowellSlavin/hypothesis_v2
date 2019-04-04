@@ -12,18 +12,6 @@ const Filters = (props) => {
 
     return (
      <div className="filter-wrapper">
-        <div className="title-container">
-            <h3>Filters</h3>
-            <button onClick={() => {
-                props.clearFilters();
-                setStudentVal('');
-                setDateVal('');
-                setTargetVal('');
-                textInput.current.value = '';
-                studentInput.current.value = '';
-                dateInput.current.value = '';
-            }}>Clear Filters</button>
-        </div>
         <p className="filterMessaging">{props.filterMessaging}</p>
         <div className="filter-container">
             <div className="filter-set">
@@ -46,6 +34,17 @@ const Filters = (props) => {
                     <input onChange={(event) => setTargetVal(event.target.value)} type="text" ref={textInput} placeholder="Filter by text" val={targetVal}></input>
                     <button onClick={() => {props.filterByTargetText(targetVal)}}>Filter!</button>
                 </div>
+            </div>
+            <div className="filter-set clear-filter">
+                <button onClick={() => {
+                    props.clearFilters();
+                    setStudentVal('');
+                    setDateVal('');
+                    setTargetVal('');
+                    textInput.current.value = '';
+                    studentInput.current.value = '';
+                    dateInput.current.value = '';
+                }}>Clear Filters</button>
             </div>
         </div>
       </div>
