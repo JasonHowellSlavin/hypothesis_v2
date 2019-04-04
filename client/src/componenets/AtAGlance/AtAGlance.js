@@ -13,6 +13,7 @@ class AtAGlance extends Component {
 
         this.getListOfMostActiveUsers = this.getListOfMostActiveUsers.bind(this);
         this.getMostAndLeastActiveUsers = this.getMostAndLeastActiveUsers.bind(this);
+        this.getMeanOfAnnotations = this.getMeanOfAnnotations.bind(this);
     }
 
     getListOfMostActiveUsers (data) {
@@ -25,16 +26,25 @@ class AtAGlance extends Component {
                 return annotation.user === entry.user;
             });
 
+            let studentAnnotations = studentPosts.reduce((accum, post) => {
+                accum.push(post.text);
+                return accum;
+            }, [])
+
             studentsAndPosts[studentPosts[0].user] = {
                 studentName: studentPosts[0].user.slice(5),
-                numPosts: studentPosts.length
+                numPosts: studentPosts.length,
+                annotations: studentAnnotations
             };
         });
 
         for(let student in studentsAndPosts) {
             finalStudentsAndPosts.push(
                 {studentName: studentsAndPosts[student].studentName,
-                 numPosts: studentsAndPosts[student].numPosts}
+                 numPosts: studentsAndPosts[student].numPosts,
+                 annotations: studentsAndPosts[student].annotations,
+                 meanOfAnnotations: this.getMeanOfAnnotations(studentsAndPosts[student])
+                }
             );
         }
 
@@ -42,8 +52,11 @@ class AtAGlance extends Component {
             return studentB.numPosts - studentA.numPosts;
         })
 
-        console.log(sortedStudentsAndPosts)
         return sortedStudentsAndPosts;
+    }
+
+    getMeanOfAnnotations (student) {
+        if (student) return Math.round(student.annotations.reduce((accum, item) => accum += item.length, 0) / student.annotations.length);
     }
 
     getMostAndLeastActiveUsers (array) {
@@ -65,6 +78,8 @@ class AtAGlance extends Component {
     componentDidUpdate(prevProps, prevState) {
         let sortedStudents = this.getListOfMostActiveUsers(this.props.activeData);
         let mostAndLeast = this.getMostAndLeastActiveUsers(this.getListOfMostActiveUsers(this.props.activeData));
+
+        this.getMeanOfAnnotations();
 
         if (this.props.activeData !== prevProps.activeData) {
             this.setState({mostAndLeastActive: mostAndLeast, sortedStudents: sortedStudents})
