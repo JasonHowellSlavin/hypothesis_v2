@@ -1,6 +1,7 @@
 @import '../../scss/_util.scss';
+@import '../../scss/_variables.scss';
 
-$section-trext-padding: 5px 20px;
+$section-text-padding: 5px 20px;
 
 .responses {
     div {
@@ -15,7 +16,7 @@ $section-trext-padding: 5px 20px;
 
         h4 {
             margin: 0;
-            padding: $section-trext-padding;
+            padding: $section-text-padding;
             text-align: left;
 
             &:first-of-type {
@@ -35,7 +36,19 @@ $section-trext-padding: 5px 20px;
         p {
             margin: 0;
             text-align: left;
-            padding: $section-trext-padding;
+            padding: $section-text-padding;
+
+            &.label {
+                font-weight: bold;
+
+                span {
+                    font-weight: normal;
+                }
+            }
+        }
+
+        p:last-of-type {
+            margin: 10px 0;
         }
     }
 }

@@ -1,0 +1,45 @@
+$base-font: 16px;
+
+* {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    text-transform: none;
+}
+
+h1 {
+    font-size:$base-font * 3;
+    padding: 5px;
+    margin: 5px;
+}
+
+h2 {
+    font-size: $base-font * 2;
+    padding: 5px;
+    margin: 5px;
+}
+
+h3 {
+    font-size: $base-font * 1.5;
+    padding: 5px;
+    margin: 5px;
+}
+
+h4 {
+    font-size: $base-font * 1.25;
+    padding: 5px;
+    margin: 5px;
+}
+
+p {
+    font-size: $base-font;
+    padding: 5px;
+    margin: 5px;
+}
+
+button {
+    padding: 5px 10px;
+}

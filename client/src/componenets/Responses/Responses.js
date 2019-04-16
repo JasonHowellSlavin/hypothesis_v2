@@ -5,15 +5,14 @@ const Responses = (props) => (
      <div>
         {props.activeData.map((item, i) => (
               <section key={item.id}>
-                <h4>Student Account: <span>{item.user.replace('acct:', '')}</span></h4>
-                <h4>Date Added: <span>{item.created.slice(0, item.created.indexOf('T'))}</span></h4>
-                <h4>{item.target[0].selector ? 'Annotation:' : 'Response:' }</h4>
+                <p className='label'>Student Account: <span>{item.user.replace('acct:', '')}</span></p>
+                <p className='label'>Date Added: <span>{item.created.slice(0, item.created.indexOf('T'))}</span></p>
+                <p className='label'>{item.target[0].selector ? 'Annotation:' : 'Response:' }</p>
                 <p>{item.text}</p>
-                <h4>Annotation Length: </h4>
-                <p>{item.text.length}</p>
-                <h4>Target Text:</h4>
+                <p className='label'>Annotation Length: <span>{item.text.length}</span></p>
+                <p className='label'>Target Text:</p>
                 <p>{item.target[0].selector ? item.target[0].selector[3].exact : 'Responsended to another annotation'}</p>
-                <h4>URL: <span>{item.uri !== undefined ? item.uri : 'No url specified'}</span></h4>
+                <p className='label'>URL: <span>{item.uri !== undefined ? item.uri : 'No url specified'}</span></p>
               </section>
         ))}
       </div>

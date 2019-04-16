@@ -13,6 +13,7 @@ class Dashboard extends Component {
         this.state = {
             data: [],
             activeData: [],
+            activeUrls: [],
             url: '',
             filters: {
                 student: '',
@@ -121,6 +122,9 @@ class Dashboard extends Component {
         }).then((response) => {
             console.log('Response:', response);
             let stateData = this.state.data.slice();
+            let currentActiveUrls = this.state.activeUrls.slice();
+
+            currentActiveUrls.push(this.state.url);
 
             response.data.forEach(item => stateData.push(item));
 
@@ -129,6 +133,7 @@ class Dashboard extends Component {
             this.setState({
                 data: cleanedStateData,
                 url: '',
+                activeUrls: currentActiveUrls,
                 activeData: cleanedStateData
             });
             console.log(stateData, 'stateData');
@@ -165,6 +170,12 @@ class Dashboard extends Component {
                                 />
                             </form>
                             <button onClick={this.hypoSearchURL}>Submit</button>
+                        </div>
+                        <div className="active-urls">
+                            <ul>
+                                <h4>Data sourced from the following URLs:</h4>
+                                {this.state.activeUrls.map( item => <li>{item}</li>)}
+                            </ul>
                         </div>
                     </div>
                     <section className="filters">

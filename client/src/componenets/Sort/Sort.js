@@ -21,8 +21,6 @@ const Sort = function (props) {
         });
     }
 
-    // target[0].selector ? item.target[0].selector[3].exact
-
     const sortByTarget = function(data) {
         return data.sort((targetA, targetB) => {
             if (targetA.target[0].selector && targetB.target[0].selector) {
@@ -37,13 +35,12 @@ const Sort = function (props) {
         });
     }
 
-
     return (
      <div>
         <button onClick={() => props.sortHook(sortByAlpha(props.data))}>Sort by Student</button>
         <button onClick={() => props.sortHook(sortByDate(props.data))}>Sort by Date</button>
         <button onClick={() => props.sortHook(sortByTarget(props.data))}>Sort by Target Text</button>
-      </div>)
+     </div>)
 };
 
 export default Sort;

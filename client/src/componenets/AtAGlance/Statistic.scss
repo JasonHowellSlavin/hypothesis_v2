@@ -18,7 +18,7 @@
     }
 
     p, h4 {
-        padding: 5px 20px;
+        padding: 5px 10px;
     }
 
     .student-stat {
@@ -32,5 +32,33 @@
 
     &.green {
         background-color: $green;
+    }
+}
+
+.most-and-least {
+    .student-stat {
+        p:first-of-type {
+            width: 70%;
+        }
+
+        p:last-of-type {
+            width: 30%;
+        }
+    }
+}
+
+.all-students-posts-numbers {
+    .student-stat {
+        p:first-of-type {
+            width: 40%;
+        }
+
+        p:nth-child(2) {
+            width: 30%;
+        }
+
+        p:nth-child(3) {
+            width: 20%;
+        }
     }
 }
