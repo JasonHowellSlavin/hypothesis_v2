@@ -12,8 +12,8 @@ const Statistic = (props) => {
                 <h4>Most Active</h4>
                 {props.mostAndLeastActive.mostActive.map((elem) => {
                     return (<div className="student-stat" key={`${elem.studentName}${elem.numPosts}`}>
-                        <p>Student Name: {elem.studentName}</p>
-                        <p>Number of Posts: {elem.numPosts}</p>
+                        <p><strong>Student Name:</strong> {elem.studentName}</p>
+                        <p><strong>Number of Posts:</strong> {elem.numPosts}</p>
                     </div>)
                 })}
                 </div>
@@ -21,8 +21,8 @@ const Statistic = (props) => {
                 <h4>Least Active</h4>
                 {props.mostAndLeastActive.leastActive.map((elem) => {
                     return (<div className="student-stat" key={`${elem.studentName}${elem.numPosts}`}>
-                        <p>Student Name: {elem.studentName}</p>
-                        <p>Number of Posts: {elem.numPosts}</p>
+                        <p><strong>Student Name: </strong> {elem.studentName}</p>
+                        <p><strong>Number of Posts: </strong> {elem.numPosts}</p>
                     </div>)
                 })}
                 </div>
