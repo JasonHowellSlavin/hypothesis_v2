@@ -11,7 +11,6 @@ class Dashboard extends Component {
     constructor() {
         super();
         this.state = {
-            data: [],
             activeData: [],
             activeUrls: [],
             url: '',
@@ -21,9 +20,9 @@ class Dashboard extends Component {
                 targetText: '',
             },
             filterMessaging: '',
-        }
+        };
+
         this.updateQueries = this.updateQueries.bind(this);
-        this.hypoSearchURL = this.hypoSearchURL.bind(this);
         this.filterByStudent = this.filterByStudent.bind(this);
         this.filterByDate = this.filterByDate.bind(this);
         this.filterByTargetText = this.filterByTargetText.bind(this);
@@ -110,74 +109,22 @@ class Dashboard extends Component {
 
 
     // API Requests
-    hypoSearchURL () {
-      //http://teaching.lfhanley.net/english528sp18/texts/edna-st-vincent-millay/
-      // http://teaching.lfhanley.net/english528sp18/texts/philip-levine-they-feed-they-lion-1972/
-    axios.request({
-            url: `api/search/url`,
-            method: 'get',
-            params: {
-              queriedURL: this.state.url
-            }
-        }).then((response) => {
-            console.log('Response:', response);
-            let stateData = this.state.data.slice();
-            let currentActiveUrls = this.state.activeUrls.slice();
-
-            currentActiveUrls.push(this.state.url);
-
-            response.data.forEach(item => stateData.push(item));
-
-            let cleanedStateData = this.removeDuplicates(stateData);
-
-            this.setState({
-                data: cleanedStateData,
-                url: '',
-                activeUrls: currentActiveUrls,
-                activeData: cleanedStateData
-            });
-            console.log(stateData, 'stateData');
-        }).catch((error) => {
-            console.log('error', error);
-        });
-    }
 
     // Lifecycle Hooks
     componentDidMount() {
-      return true;
+        this.setState({activeData: this.props.data});
+    }
+
+    componentDidUpdate (prevProps) {
+        if (this.props.data !== prevProps.data) {
+                this.setState({activeData: this.props.data});
+        }
     }
 
     render() {
         return (
             <div className="App">
-                <header className="App-header">
-                    <h1 className="App-title">Hypothes.is Dashboard</h1>
-                </header>
                 <section className="interface">
-                    <div className="user-inputs">
-                        <h3> Enter a URL below to see annotations from that url.
-                        If you would like to check multiple urls, simply add them one at a
-                        time and click submit</h3>
-                        <div>
-                            <form id="form">
-                                <Input
-                                    url={this.state.url}
-                                    labelInputName={'url'}
-                                    labelText={'URL'}
-                                    inputType={'text'}
-                                    inputValue={this.state.url}
-                                    updateQueries={this.updateQueries}
-                                />
-                            </form>
-                            <button onClick={this.hypoSearchURL}>Submit</button>
-                        </div>
-                        <div className="active-urls">
-                            <ul>
-                                <h4>Data sourced from the following URLs:</h4>
-                                {this.state.activeUrls.map( item => <li>{item}</li>)}
-                            </ul>
-                        </div>
-                    </div>
                     <section className="filters">
                         <Filters
                             filterByStudent={this.filterByStudent}
@@ -192,7 +139,7 @@ class Dashboard extends Component {
                     <div className="response-browser">
                         <section className="responses">
                             <h2> Annotations </h2>
-                            <p>Currently viewing {this.state.activeData.length ? this.state.activeData.length : 0} of {this.state.data.length ? this.state.data.length : 0} total Annotations</p>
+                            <p>Currently viewing {this.state.activeData.length ? this.state.activeData.length : 0} of {this.props.data.length ? this.props.data.length : 0} total Annotations</p>
                             <div className="sort-wrapper">
                                 <Sort
                                     data={this.state.activeData}
@@ -201,7 +148,7 @@ class Dashboard extends Component {
                             </div>
                             <Responses
                                 activeData={this.state.activeData}
-                                totalData={this.state.data}
+                                totalData={this.props.data}
                             />
                         </section>
                     </div>
@@ -210,7 +157,7 @@ class Dashboard extends Component {
                         <p>Currently viewing statistics from {this.state.activeData.length ? this.state.activeData.length : 0} annotations</p>
                         <AtAGlance className="at-a-glance-wrapper"
                             activeData={this.state.activeData}
-                            totalData={this.state.data}
+                            totalData={this.props.data}
                          />
                     </div>
                 </section>

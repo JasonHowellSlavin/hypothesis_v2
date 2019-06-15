@@ -30,8 +30,12 @@
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "mini-create-react-context": "^0.3.2",
     "nodemon": "^1.18.10",
     "path": "^0.12.7",
+    "react": "^16.8.6",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
     "request": "^2.88.0"
   }
 }
