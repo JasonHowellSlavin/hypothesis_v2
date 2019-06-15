@@ -98,7 +98,7 @@ class Dashboard extends Component {
     }
 
     clearFilters () {
-        let unfilteredData = this.state.data;
+        let unfilteredData = this.props.data;
         this.setState({activeData: unfilteredData});
     }
 

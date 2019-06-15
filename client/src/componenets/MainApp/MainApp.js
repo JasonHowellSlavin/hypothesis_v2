@@ -30,12 +30,7 @@ class MainApp extends Component {
         }
         this.updateQueries = this.updateQueries.bind(this);
         this.hypoSearchURL = this.hypoSearchURL.bind(this);
-        this.filterByStudent = this.filterByStudent.bind(this);
-        this.filterByDate = this.filterByDate.bind(this);
-        this.filterByTargetText = this.filterByTargetText.bind(this);
         this.removeDuplicates = this.removeDuplicates.bind(this);
-        this.clearFilters = this.clearFilters.bind(this);
-        this.sortHook = this.sortHook.bind(this);
     }
 
     // Functionality methods
@@ -50,70 +45,6 @@ class MainApp extends Component {
             return duplicatHash.hasOwnProperty(item.id) ? false : duplicatHash[item.id] = true;
         });
     }
-
-
-    // Filter methods
-    filterByStudent (studentName) {
-        let correctName = studentName.indexOf('acct:') > -1 ? studentName : 'acct:' + studentName;
-        let filteredActiveData = this.state.activeData.slice();
-
-        let dataFiltered = filteredActiveData.filter((item, index, array) => {
-            return item.user === correctName;
-        })
-
-        if (dataFiltered.length > 0) {
-            this.setState({activeData: dataFiltered});
-        } else {
-            this.setState({filterMessaging: 'Sorry, no data matched that filter'});
-        }
-    }
-
-    filterByDate (date) {
-        let dateRegEx = /([0-9]{4}-[0-9]{2}-[0-9]{2})/g;
-        let filteredActiveData = this.state.activeData.slice();
-
-        let dateFiltered =  filteredActiveData.filter((item, index, array) => {
-            return item.created.match(dateRegEx)[0] === date;
-        })
-
-        if (date !== date.match(dateRegEx)[0]) {
-            this.setState({filterMessaging: 'Sorry you did not enter the date correctly, format should be YYYY-MM-DD'});
-        } else if (dateFiltered.length <= 0) {
-            this.setState({filterMessaging: 'It appears there are annotations matching the date you chose'});
-        } else {
-            this.setState({activeData: dateFiltered});
-        }
-    }
-
-    filterByTargetText (targetText) {
-        let filteredActiveData = this.state.activeData.slice();
-
-        let textFiltered = filteredActiveData.filter((item, index, array) => {
-            if (item.target[0].selector) {
-                let lowerCaseExact = item.target[0].selector[3].exact.toLowerCase();
-                return lowerCaseExact.indexOf(targetText.toLowerCase()) > -1;
-            } else {
-                return false;
-            }
-        })
-
-        if (textFiltered.length <= 0) {
-            this.setState({filterMessaging: 'It appears the target text does not appear'});
-        } else {
-            this.setState({activeData: textFiltered});
-        }
-    }
-
-    clearFilters () {
-        let unfilteredData = this.state.data;
-        this.setState({activeData: unfilteredData});
-    }
-
-    // Sort methods
-    sortHook (methodReturn) {
-        this.setState({activeData: methodReturn})
-    }
-
 
     // API Requests
     hypoSearchURL () {
@@ -152,7 +83,6 @@ class MainApp extends Component {
     componentDidMount() {
       return true;
     }
-
 
     render() {
         return (
@@ -194,7 +124,7 @@ class MainApp extends Component {
                             <div className="active-urls">
                                 <ul>
                                     <h4>Data sourced from the following URLs:</h4>
-                                    {this.state.activeUrls.map( item => <li>{item}</li>)}
+                                    {this.state.activeUrls.map( item => <li key={`url:${item}`}>{item}</li>)}
                                 </ul>
                             </div>
                         </div>
