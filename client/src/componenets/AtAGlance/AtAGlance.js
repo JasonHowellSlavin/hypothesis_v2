@@ -9,11 +9,14 @@ class AtAGlance extends Component {
             active: [],
             sortedStudents: [],
             mostAndLeastActive: {mostActive: [], leastActive: []},
+            mostAndLeastIsOpen: true,
+            allStudentsIsOpen: true,
         }
 
         this.getListOfMostActiveUsers = this.getListOfMostActiveUsers.bind(this);
         this.getMostAndLeastActiveUsers = this.getMostAndLeastActiveUsers.bind(this);
         this.getMeanOfAnnotations = this.getMeanOfAnnotations.bind(this);
+        this.toggleStatBlock = this.toggleStatBlock.bind(this);
     }
 
     getListOfMostActiveUsers (data) {
@@ -71,6 +74,11 @@ class AtAGlance extends Component {
         return {mostActive: mostActive, leastActive: leastActive};
     }
 
+    toggleStatBlock (statBlockBoolean, stateVar) {
+        let currentVal = statBlockBoolean;
+        this.setState({[stateVar]: !currentVal })
+    }
+
     componentDidMount() {
         return true;
     }
@@ -92,6 +100,9 @@ class AtAGlance extends Component {
             <Statistic
                 mostAndLeastActive={this.state.mostAndLeastActive}
                 sortedStudents={this.state.sortedStudents}
+                mostAndLeastOpen={this.state.mostAndLeastIsOpen}
+                allStudentsOpen={this.state.allStudentsIsOpen}
+                toggleSection={this.toggleStatBlock}
             />
           </div>
         );
