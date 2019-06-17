@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Dashboard.scss';
-import axios from 'axios';
 import Input from '../Input/Input.js';
 import Responses from '../Responses/Responses.js';
 import Filters from '../Filters/Filters.js';
@@ -43,7 +42,6 @@ class Dashboard extends Component {
             return duplicatHash.hasOwnProperty(item.id) ? false : duplicatHash[item.id] = true;
         });
     }
-
 
     // Filter methods
     filterByStudent (studentName) {
@@ -106,9 +104,6 @@ class Dashboard extends Component {
     sortHook (methodReturn) {
         this.setState({activeData: methodReturn})
     }
-
-
-    // API Requests
 
     // Lifecycle Hooks
     componentDidMount() {

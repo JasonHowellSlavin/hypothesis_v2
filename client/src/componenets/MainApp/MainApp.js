@@ -105,28 +105,30 @@ class MainApp extends Component {
                     </header>
                     <section className="interface">
                         <div className="user-inputs">
-                            <h3> Enter a URL below to see annotations from that url.
-                            If you would like to check multiple urls, simply add them one at a
-                            time and click submit</h3>
-                            <div>
-                                <form id="form">
-                                    <Input
-                                        url={this.state.url}
-                                        labelInputName={'url'}
-                                        labelText={'URL'}
-                                        inputType={'text'}
-                                        inputValue={this.state.url}
-                                        updateQueries={this.updateQueries}
-                                    />
-                                </form>
-                                <button onClick={this.hypoSearchURL}>Submit</button>
-                            </div>
-                            <div className="active-urls">
+                            <section className="search-section">
+                                <h3> Enter a URL below to see annotations from that url.
+                                If you would like to check multiple urls, simply add them one at a
+                                time and click submit</h3>
+                                <div>
+                                    <form id="form">
+                                        <Input
+                                            url={this.state.url}
+                                            labelInputName={'url'}
+                                            labelText={'URL'}
+                                            inputType={'text'}
+                                            inputValue={this.state.url}
+                                            updateQueries={this.updateQueries}
+                                        />
+                                    </form>
+                                    <button onClick={this.hypoSearchURL}>Submit</button>
+                                </div>
+                            </section>
+                            <section className="active-urls">
                                 <ul>
-                                    <h4>Data sourced from the following URLs:</h4>
+                                    <h3>Data sourced from the following URLs:</h3>
                                     {this.state.activeUrls.map( item => <li key={`url:${item}`}>{item}</li>)}
                                 </ul>
-                            </div>
+                            </section>
                         </div>
                     </section>
                     <section className="info-holder">
