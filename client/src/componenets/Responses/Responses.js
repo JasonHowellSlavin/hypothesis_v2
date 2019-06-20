@@ -12,10 +12,15 @@ const Responses = (props) => (
                 <p className='label'>Annotation Length: <span>{item.text.length}</span></p>
                 <p className='label'>Target Text:</p>
                 <p>{(() => {
-                    if (item.target[0].selector) {
-                        if (item.target[0].selector[3] !== undefined && item.target[0].selector[3].exact) {
-                            return item.target[0].selector[3].exact;
-                        }
+                    let targetText;
+
+                    if (item.target[0].selector !== undefined) {
+                        item.target[0].selector.forEach((selectItem) => {
+                            if (selectItem.hasOwnProperty('exact')) {
+                                targetText = selectItem['exact'];
+                            }
+                        })
+                        return targetText;
                     } else {
                         return 'Responsended to another annotation';
                     }
