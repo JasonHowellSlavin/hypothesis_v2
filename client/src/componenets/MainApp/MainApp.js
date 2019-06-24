@@ -21,6 +21,8 @@ class MainApp extends Component {
             activeData: [],
             activeUrls: [],
             url: '',
+            students: [],
+            activeStudents: [],
             filters: {
                 student: '',
                 date: '',
@@ -28,8 +30,10 @@ class MainApp extends Component {
             },
             filterMessaging: '',
         }
+        this.setActiveData = this.setActiveData.bind(this);
         this.updateQueries = this.updateQueries.bind(this);
         this.hypoSearchURL = this.hypoSearchURL.bind(this);
+        this.setBaseStudentData = this.setBaseStudentData.bind(this);
         this.removeDuplicates = this.removeDuplicates.bind(this);
     }
 
@@ -44,6 +48,46 @@ class MainApp extends Component {
         return currentData.filter((item) => {
             return duplicatHash.hasOwnProperty(item.id) ? false : duplicatHash[item.id] = true;
         });
+    }
+
+    setBaseStudentData(response) {
+        let currentStudentArray = Array.from(this.state.students);
+        let newStudentArray = [];
+
+        response.forEach((elem) => {
+            let currentStudent = {
+                user: elem.user,
+                name: elem.user.slice(5, elem.user.length),
+                assocUri: [elem.uri],
+            }
+
+            newStudentArray.push(currentStudent);
+        })
+
+        if (currentStudentArray.length) {
+            currentStudentArray.forEach((student) => {
+                newStudentArray.forEach((newStudent) => {
+                    if (student.uri !== newStudent.uri) {
+                        newStudentArray.assocUri.push(student.uri);
+                        currentStudentArray.assocUri.push(newStudent.uri);
+                    }
+                })
+            })
+        }
+
+        let totalArray = newStudentArray.concat(currentStudentArray);
+        let deDupeObj = {};
+
+        let final = totalArray.filter((item) => {
+            return deDupeObj.hasOwnProperty(item.user) ? false : deDupeObj[item.user] = true;
+        });
+
+        return final;
+
+    }
+
+    setActiveData(data) {
+        this.setState({activeData: data});
     }
 
     // API Requests
@@ -66,12 +110,14 @@ class MainApp extends Component {
             response.data.forEach(item => stateData.push(item));
 
             let cleanedStateData = this.removeDuplicates(stateData);
+            let studentData = this.setBaseStudentData(response.data);
 
             this.setState({
                 data: cleanedStateData,
                 url: '',
                 activeUrls: currentActiveUrls,
-                activeData: cleanedStateData
+                activeData: cleanedStateData,
+                students: studentData,
             });
             console.log(stateData, 'stateData');
         }).catch((error) => {
@@ -132,7 +178,11 @@ class MainApp extends Component {
                         </div>
                     </section>
                     <section className="info-holder">
-                        <Route path="/" exact render={(props) => <Dashboard {...props} data={this.state.data}/>} />
+                        <Route path="/" exact render={(props) => <Dashboard {...props}
+                            activeData={this.state.activeData}
+                            setActiveData={this.setActiveData}
+                            data={this.state.data}/>}
+                        />
                         <Route path="/student-info" component={StudentInfo} />
                     </section>
                 </Router>
